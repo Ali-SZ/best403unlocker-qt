@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_NAME best403unlocker-gui)
+set(PROJECT_NAME 403unlocker-gui)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -17,19 +17,16 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-set(SOURCES
-  src/main.cpp
-  src/mainwindow.cpp
+file(GLOB_RECURSE SOURCES
+  ${CMAKE_SOURCE_DIR}/src/*.cpp
 )
 
-# Add header files
-set(HEADERS
-  include/mainwindow.h
+file(GLOB_RECURSE HEADERS
+  ${CMAKE_SOURCE_DIR}/include/*.h
 )
 
-# Add UI files
-set(UIS
-  ui/mainwindow.ui
+file(GLOB_RECURSE UIS
+  ${CMAKE_SOURCE_DIR}/ui/*.ui
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${UIS})
