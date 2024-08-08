@@ -15,8 +15,6 @@ project(${PROJECT_NAME} LANGUAGES CXX)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
 file(GLOB_RECURSE SOURCES
   ${CMAKE_SOURCE_DIR}/src/*.cpp
 )
@@ -34,6 +32,9 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${UIS})
 target_link_libraries(${PROJECT_NAME} PRIVATE
   Qt${QT_VERSION_MAJOR}::Core
   Qt${QT_VERSION_MAJOR}::Widgets
+)
+target_include_directories(${PROJECT_NAME} PRIVATE
+  ${CMAKE_SOURCE_DIR}/include/widget
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
