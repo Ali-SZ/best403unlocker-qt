@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "dnswidget.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
   class MainWindow;
@@ -18,6 +20,8 @@ public:
 
 private:
   Ui::MainWindow* ui;
+
+  void addDnsWidget();
 };
 
 #endif // MAINWINDOW.H
