@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "dnsstatuswidget.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
   class DnsWidget;
@@ -18,6 +20,8 @@ public:
 
 private:
   Ui::DnsWidget* ui;
+
+  void addDnsStatusWidget();
 };
 
 #endif // DNSWIDGET.H

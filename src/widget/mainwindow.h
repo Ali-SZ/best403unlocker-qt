@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFile>
+#include <QTabBar>
 
 #include "dnswidget.h"
 
@@ -22,6 +24,10 @@ private:
   Ui::MainWindow* ui;
 
   void addDnsWidget();
+  void addDnsLogWidget();
+  void addDockerWidget();
+  void addDockerLogWidget();
+  void applyTheme();
 };
 
 #endif // MAINWINDOW.H
