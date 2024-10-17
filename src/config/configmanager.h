@@ -3,15 +3,11 @@
 
 #include <QString>
 
-struct DnsConfig
-{ 
-  QString name;
-  QString ip;
+struct DnsConfig {
+    QString name;
+    QString ip;
 };
 
-
-class ConfigManager {
-
-};
+class ConfigManager {};
 
 #endif //CONFIGMANAGER_H

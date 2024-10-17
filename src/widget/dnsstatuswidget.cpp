@@ -2,9 +2,9 @@
 #include "dnsstatuswidget.h"
 
 DnsStatusWidget::DnsStatusWidget(QWidget* parent) : QWidget(parent), ui(new Ui::DnsStatusWidget) {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 DnsStatusWidget::~DnsStatusWidget() {
-  delete ui;
+    delete ui;
 }

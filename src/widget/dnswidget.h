@@ -7,21 +7,21 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-  class DnsWidget;
+    class DnsWidget;
 }
 QT_END_NAMESPACE
 
 class DnsWidget : public QWidget {
-  Q_OBJECT
+    Q_OBJECT
 
-public:
-  DnsWidget(QWidget* parent = nullptr);
-  ~DnsWidget();
+  public:
+    DnsWidget(QWidget* parent = nullptr);
+    ~DnsWidget();
 
-private:
-  Ui::DnsWidget* ui;
+  private:
+    Ui::DnsWidget* ui;
 
-  void addDnsStatusWidget();
+    void           addDnsStatusWidget();
 };
 
 #endif // DNSWIDGET.H

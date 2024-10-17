@@ -3,9 +3,9 @@
 #include "widget/mainwindow.h"
 
 int main(int argc, char* argv[]) {
-  QApplication app(argc, argv);
-  MainWindow   w;
+    QApplication app(argc, argv);
+    MainWindow   w;
 
-  w.show();
-  return app.exec();
+    w.show();
+    return app.exec();
 }
