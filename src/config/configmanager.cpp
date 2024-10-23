@@ -10,8 +10,13 @@
 
 #include <vector>
 
-void ConfigManager::init() {
-    openJsonFile(QString("%1/best403unlocker/config.json").arg(QDir::homePath()));
+ConfigManager::~ConfigManager() {
+    saveTimeoutToFile();
+}
+
+void ConfigManager::init(const QString&& jsonPath) {
+    m_jsonPath = jsonPath;
+    openJsonFile();
 }
 
 std::vector<DnsConfig> ConfigManager::dnsConfigs() {
@@ -24,11 +29,10 @@ uint64_t ConfigManager::timeout() {
 
 void ConfigManager::setTimeout(uint64_t timeout) {
     m_timeout = timeout;
-    // TODO: save changes to file
 }
 
-void ConfigManager::openJsonFile(const QString jsonPath) {
-    QFile jsonFile(jsonPath);
+void ConfigManager::openJsonFile() {
+    QFile jsonFile(m_jsonPath);
     if (!jsonFile.open(QIODevice::ReadOnly)) {
         // TODO: error message
         return;
@@ -55,18 +59,38 @@ void ConfigManager::parseJson() {
         m_timeout = jsonObject["timeout"].toInt(10000);
     }
 
-    if (jsonObject.contains("dns") && jsonObject["dns"].isArray()) {
-        QJsonArray dnsArray = jsonObject["dns"].toArray();
+    if (jsonObject.contains("dns-list") && jsonObject["dns-list"].isArray()) {
+        QJsonArray dnsArray = jsonObject["dns-list"].toArray();
         m_dnsConfigs.clear();
         m_dnsConfigs.reserve(dnsArray.size());
 
         for (const QJsonValue& value : dnsArray) {
             QJsonObject dnsObject = value.toObject();
             DnsConfig   dns;
-            dns.name = dnsObject["name"].toString();
-            dns.ip   = dnsObject["ip"].toString();
+            dns.name      = dnsObject["name"].toString();
+            dns.primary   = dnsObject["primary"].toString();
+            dns.secondary = dnsObject["secondary"].toString();
 
             m_dnsConfigs.emplace_back(dns);
         }
     }
+}
+
+void ConfigManager::saveTimeoutToFile() {
+    if (!m_jsonDoc.isObject()) {
+        // TODO: error message
+        return;
+    }
+
+    QJsonObject jsonObject = m_jsonDoc.object();
+    jsonObject["timeout"]  = static_cast<double>(m_timeout);
+    m_jsonDoc.setObject(jsonObject);
+
+    QFile file(m_jsonPath);
+    if (!file.open(QIODevice::WriteOnly)) {
+        // TODO: error message
+        return;
+    }
+    file.write(m_jsonDoc.toJson());
+    file.close();
 }

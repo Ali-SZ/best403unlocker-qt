@@ -8,12 +8,14 @@
 
 struct DnsConfig {
     QString name;
-    QString ip;
+    QString primary;
+    QString secondary;
 };
 
 class ConfigManager {
   public:
-    void                   init();
+    ~ConfigManager();
+    void                   init(const QString&& jsonPath);
 
     std::vector<DnsConfig> dnsConfigs();
     uint64_t               timeout();
@@ -23,9 +25,11 @@ class ConfigManager {
     uint64_t               m_timeout;
     std::vector<DnsConfig> m_dnsConfigs;
     QJsonDocument          m_jsonDoc;
+    QString                m_jsonPath;
 
-    void                   openJsonFile(const QString jsonPath);
+    void                   openJsonFile();
     void                   parseJson();
+    void                   saveTimeoutToFile();
 };
 
 #endif //CONFIGMANAGER_H
