@@ -9,11 +9,11 @@
   font-family: Roboto;
 
   
-    font-size: 13px;
+    font-size: 16px;
   
 
   
-    line-height: 13px;
+    line-height: 16px;
   
 
   selection-background-color: #6effe8;
