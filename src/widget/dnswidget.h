@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "dnsstatuswidget.h"
+#include "../config/configmanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,7 +21,13 @@ class DnsWidget : public QWidget {
   private:
     Ui::DnsWidget* ui;
 
-    void           addDnsStatusWidget();
+    void           setUiConnects();
+    void           addDnsStatusWidget(const DnsConfig& dns);
+    void           setPageLocked(const bool&& lock);
+
+  private slots:
+    void startButtonClicked();
+    void linkLineEditEdited(const QString& text);
 };
 
 #endif // DNSWIDGET.H
